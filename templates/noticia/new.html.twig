@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Noticia{% endblock %}
+
+{% block body %}
+    <div class="newNewDiv"> 
+    <h1>Create new Noticia</h1>
+
+    {{ include('noticia/_form.html.twig') }}
+
+    <a href="{{ path('app_noticia_index') }}">back to list</a>
+    </div>
+{% endblock %}

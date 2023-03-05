@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Welcome to PhotoBlog {{ controller_name }}! </h1>
+
+  
+    
+
+     {% if app.user %}
+     
+ {% if is_granted('ROLE_ADMIN') %}
+        
+          <h5> Welcome Admin </h5>
+     {% endif %}
+   {# <li>Hola {{ app.user }}"></li>  #}
+    <h6><img class="fotoUsr" width="50x" src="/images/{{app.user.foto}}"> Usuario registrado :{{ app.user.username }}  
+ 
+     <h6><a href="{{ path('app_logout') }}">Logout</h6></a>
+
+
+     {% else %}
+      <h6><b>Usuario no registrado </b></h6>  
+
+      <ul>
+          {# <li>REGISTRO <code><a href="{{ path('app_register') }}"> registro</a></code></li>
+        <li>LOGIN <code><a href="{{ path('app_login') }}"> login</a></code></li> #}
+        <li>REGISTRO <code><a href="{{ path('app_register') }}"> registro</a></code></li>
+        <li>LOGIN <code><a href="{{ path('app_login') }}"> login</a></code></li>
+    </ul>
+       {% endif %}
+    
+
+</div>
+{#  comienzo  experimento #}
+
+ {% if is_granted('ROLE_ADMIN') %}
+    <div class="adminDiv">    
+    <h4 class="headerListAdmin"> Listado de users</h4> 
+
+ {% for user in users %}       
+            <h6 class="headerListAdmin">user:{{user.username}}, mail: {{user.email}}, fecha de nacimiento: {{ user.fechanaci is empty ? "" : user.fechanaci|date("d/m/Y") }}
+
+            <img class="fotoUsr" width="50x" src="/images/{{user.foto}}"> </h6>
+            <hr>
+{% endfor %}
+
+
+
+
+
+<div>
+{% endif %}
+   
+{#  fin experimento #}    
+
+{% for noticia in noticias %}       
+           <div class="newNewBox">
+              {#  <td><b>{{ noticia.id }}<b></td> #}
+                <h3 class="NoticiaTitle">{{ noticia.titulo}}</h3>
+                <p class="authorData">username: {{ noticia.autor.username}}<img class="fotoUsr" width="50px" src="/images/{{ noticia.autor.foto}}"></p>
+                <p class="fechaNoti">Fecha de la noticia : {{ noticia.date | date ('d/m/y')}}</p> 
+                <br/>
+                 <br/>
+                  <br/>
+                <p class="clear">{{ noticia.description}}</p>
+                <img class="fotoNoticia" width="300px" src="/images/{{noticia.noticiafoto}}"> </p>
+            </div>
+              
+<hr/>
+       
+        {% endfor %}
+      
+
+
+
+{% endblock %}
