@@ -9,14 +9,14 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Welcome to PhotoBlog {{ controller_name }}! </h1>
-
-  
-    
+    <h1>Welcome to PhotoBlog   <i class="fas fa-play"> </i>{{ controller_name }}! </h1>
 
      {% if app.user %}
-     
- {% if is_granted('ROLE_ADMIN') %}
+          <button  class="btn bnt-primary" href="{{ path('app_noticia_new') }}">  Crear Nueva Noticia</button> 
+           <button class="btn bnt-primary" href="{{ path('app_noticia_index') }}"> Ver listado de noticias</button>
+        
+          
+    {% if is_granted('ROLE_ADMIN') %}
         
           <h5> Welcome Admin </h5>
      {% endif %}
@@ -62,6 +62,7 @@
 {#  fin experimento #}    
 
 {% for noticia in noticias %}       
+
            <div class="newNewBox">
               {#  <td><b>{{ noticia.id }}<b></td> #}
                 <h3 class="NoticiaTitle">{{ noticia.titulo}}</h3>
